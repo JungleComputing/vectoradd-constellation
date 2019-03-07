@@ -15,8 +15,8 @@ function check_env_dir() {
     fi
 }
 
-check_env_dir COMMON_SOURCE_IDENTIFICATION_CASHMERE_DIR
-BIN_DIR=$COMMON_SOURCE_IDENTIFICATION_CASHMERE_DIR/bin
+check_env_dir VECTORADD_DIR
+BIN_DIR=$VECTORADD_DIR/bin
 
 source $BIN_DIR/create_class_path.bash
 

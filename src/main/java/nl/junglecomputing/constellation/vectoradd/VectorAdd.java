@@ -32,6 +32,8 @@ public class VectorAdd {
     }
 
     public static void main(String[] args) throws Exception {
+	// this code is executed on every node
+	
 	// the number of executors per node in the cluster
         int nrExecutorsPerNode = 4;
 	
@@ -76,24 +78,8 @@ public class VectorAdd {
         // b contains all zeros
         float[] b = new float[n];
 
-        // Initialize cashmere with default executors for constellation.
-
-        // This means that there is an executor that executes activities with
-        // contexts 'global activity context 1', does not steal jobs, and
-        // executors that steal from stealpool 'global 0' can steal its
-        // activities.
-
-        // In addition there are several executors (set by the property
-        // 'cashmere.nGlobalExecutors') that execute jobs with label 'global
-        // activity context 0', steal from stealpool 'global 0', and executors
-        // that steal from stealpool 'local 0' can steal their activities.
-
-        // Finally, there are several executors (set by the property
-        // 'cashmere.nLocalExecutors') that execute jobs with label 'local 0',
-        // steal from stealpool 'local 0', and executors that steal from
-        // stealpool 'local 1' can steal their activities.
-        // retrieve constellation from cashmere.
-
+        // Initialize Constellation with the following configuration for an
+	// executor.  We create nrExecutorsPerNode on a node.
 	ConstellationConfiguration config = 
 	  new ConstellationConfiguration(new Context(VectorAddActivity.LABEL), 
 		  StealStrategy.SMALLEST, StealStrategy.BIGGEST, 
@@ -105,17 +91,19 @@ public class VectorAdd {
 	constellation.activate();
 
         if (constellation.isMaster()) {
+	    // This is master specific code.  The rest is going to call
+	    // Constellation.done(), waiting for Activities to steal.
+	    
             System.out.println("VectorAdd, running with n: " + n);
-            System.out.println("I am the master!");
 
-            // set up the various activities, staring with the main activity:
 
 	    Timer overallTimer = constellation.getOverallTimer();
 	    int timing = overallTimer.start();
 
+            // set up the various activities, staring with the main activity:
+	    
             // The SingleEventCollector is an activity that waits for a single
-            // event to come in will finish then. We associate context 'global
-            // activity context 1' with it.
+            // event to come in will finish then. 
             SingleEventCollector sec = new SingleEventCollector(new Context(VectorAddActivity.LABEL));
 
             // submit the single event collector

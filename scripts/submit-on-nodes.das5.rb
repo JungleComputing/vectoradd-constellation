@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$root_dir=ENV['COMMON_SOURCE_IDENTIFICATION_CASHMERE_DIR']
+$root_dir=ENV['VECTORADD_DIR']
 $bin_dir="#{$root_dir}/bin"
 
 require("#{$bin_dir}/submit-on-nodes.rb")
@@ -22,7 +22,7 @@ open(filename, 'w') do |f|
   f.puts "#SBATCH -w #{$node_names.join(",")}"
   f.puts "#SBATCH --get-user-env"
   f.puts ""
-  f.puts "CLASSPATH=#{$classpath}:$CLASSPATH srun $COMMON_SOURCE_IDENTIFICATION_CASHMERE_DIR/bin/run-script " +
+  f.puts "CLASSPATH=#{$classpath}:$CLASSPATH srun $VECTORADD_DIR/bin/run-script " +
     "-XX:MaxDirectMemorySize=50G " +
     "-Dibis.server.address=fs0.das5.cs.vu.nl " +
     "-Dibis.constellation.closed=true " +
