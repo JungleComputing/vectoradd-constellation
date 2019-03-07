@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# # This script can be used for running ibis applications on the local host.
+
+# if [ -z "$CASHMERE" ];  then
+#     echo "please set CASHMERE to the location of your Cashmere installation" 1>&2
+#     exit 1
+# fi
+
+# if [ -z "$COMMAND" ]; then
+#     COMMAND="$CASHMERE/cashmere-scripts/cashmere-run"
+# fi
+
+CASHMERE_TEMP_DIR=$HOME/.cashmere_tmp
+
+mkdir -p $CASHMERE_TEMP_DIR
+
+# case "$1" in
+#     -cp)
+# 	export CLASSPATH="$2"
+# 	shift
+# 	shift
+# 	;;
+# esac
+
+java -classpath $CLASSPATH \
+     -Djava.io.tmpdir=$CASHMERE_TEMP_DIR \
+     -Dibis.constellation.steal.delay=10 "$@" 2>&1
+
+#. "$COMMAND" -Djava.io.tmpdir=$HOME/cashmere_tmp -Dibis.constellation.steal.delay=10 "$@" 2>&1
