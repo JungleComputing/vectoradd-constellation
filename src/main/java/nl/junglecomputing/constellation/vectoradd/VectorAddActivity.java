@@ -11,6 +11,7 @@ import ibis.constellation.Context;
 import ibis.constellation.Constellation;
 import ibis.constellation.Event;
 import ibis.constellation.NoSuitableExecutorException;
+import ibis.constellation.Timer;
 
 class VectorAddActivity extends Activity {
 
@@ -59,7 +60,15 @@ class VectorAddActivity extends Activity {
     public int initialize(Constellation cons) {
 	int n = result.c.length;
 	if (n <= computeDivideThreshold) {
+
+	    String executor = cons.identifier().toString();
+	    Timer timer = cons.getTimer("java", executor, "vector add");
+	    int timing = timer.start();
+	    
 	    ComputeVectorAdd.compute(result.c, a, b);
+	    
+	    timer.stop(timing);
+
 	    return FINISH;
 	}
 	else {

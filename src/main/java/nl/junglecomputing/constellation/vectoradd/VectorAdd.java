@@ -110,6 +110,9 @@ public class VectorAdd {
 
             // set up the various activities, staring with the main activity:
 
+	    Timer overallTimer = constellation.getOverallTimer();
+	    int timing = overallTimer.start();
+
             // The SingleEventCollector is an activity that waits for a single
             // event to come in will finish then. We associate context 'global
             // activity context 1' with it.
@@ -126,6 +129,8 @@ public class VectorAdd {
 		(VectorAddResult) sec.waitForEvent().getData();
             logger.debug("main(), done with waitForEvent() on identifier "
 		    + aid);
+
+	    overallTimer.stop(timing);
 
             writeFile(result.c);
         }
