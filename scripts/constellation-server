@@ -22,7 +22,7 @@ check_env_dir VECTORADD_DIR
 BIN_DIR=$VECTORADD_DIR/bin
 
 source $BIN_DIR/check_environment_variable.bash
-check_env CASHMERE_PORT
+check_env CONSTELLATION_PORT
 
 source $BIN_DIR/create_class_path.bash
 

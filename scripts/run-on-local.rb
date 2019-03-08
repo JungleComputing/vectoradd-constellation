@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-root_dir=ENV['PRALINE_CASHMERE_DIR']
+root_dir=ENV['VECTORADD_DIR']
 bin_dir="#{root_dir}/bin"
 
 if ARGV.length < 2
@@ -12,7 +12,7 @@ basedir = ARGV[0]
 className = ARGV[1]
 rest = ARGV[2..-1]
 classpath = `#{bin_dir}/create-class-path #{basedir}`.chomp
-port = ENV['CASHMERE_PORT']
+port = ENV['CONSTELLATION_PORT']
 
 command = "#{bin_dir}/run-script-local -cp #{classpath}:$CLASSPATH -Xmx2G " +
     "-Dibis.server.address=localhost:#{port} " +

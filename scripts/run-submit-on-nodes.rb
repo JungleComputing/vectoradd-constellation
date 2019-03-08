@@ -104,6 +104,6 @@ else
 end
 
 $classpath = `#{$bin_dir}/create-class-path #{basedir} #{jar}`.chomp
-$port = ENV['CASHMERE_PORT']
+$port = ENV['CONSTELLATION_PORT']
 
 
