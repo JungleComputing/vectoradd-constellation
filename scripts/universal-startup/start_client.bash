@@ -53,6 +53,9 @@ if [ -f "$result" ]; then
   cd ~/
   tar -zcvf $VECTORADD_DIR/result.tar.gz vectoradd.out
   mv vectoradd.out $VECTORADD_DIR/vectoradd.out
+else
+  # Remove possible leftover results from previous runs
+  rm -rf $VECTORADD_DIR/result.tar.gz
 fi
 
 if [ $clientTimeout -lt 0 ]; then
