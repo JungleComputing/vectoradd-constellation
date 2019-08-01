@@ -8,4 +8,6 @@ mkdir -p $JAVA_IO_TEMP_DIR
 
 java -classpath $CLASSPATH \
      -Djava.io.tmpdir=$JAVA_IO_TEMP_DIR \
+     -Dibis.constellation.profile=true \
+     -Dibis.constellation.profile.output=gantt \
      -Dibis.constellation.steal.delay=10 "$@" 2>&1
